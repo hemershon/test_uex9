@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'api/v1/sessions',
     registrations: 'api/v1/registrations',
     passwords: 'api/v1/passwords'
-  }
+  }, defaults: { format: :json }
 
   namespace :api do
     namespace :v1 do
@@ -15,7 +15,6 @@ Rails.application.routes.draw do
         post 'passwords/reset', to: 'passwords#reset'
       end
       resources :contacts
-       post 'users', to: 'registrations#create'
     end
   end
 end

@@ -5,6 +5,7 @@ module Api
 
       def create
         user = User.new(user_params)
+        byebug
         if user.save
           render json: { status: 'User created successfully', data: user }, status: :created
         else

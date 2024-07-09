@@ -15,6 +15,9 @@ gem "puma", ">= 5.0"
 gem 'devise-jwt'
 gem 'cpf_cnpj'
 gem 'kaminari'
+gem 'hotwire-rails'
+gem "rack-cors"
+
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -38,7 +41,6 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
