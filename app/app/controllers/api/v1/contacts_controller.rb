@@ -3,7 +3,13 @@ class Api::V1::ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :update, :destroy]
 
   def index
-    @contacts = current_user.contacts.order(:name)
+    @contacts = current_user.contacts.order.order(:name).page(params[:page]).per(params[:per_page]) || 10
+
+    if params[:cpf].present?
+      @contacts = @contacts.where(cpf: params[:cpf])
+    elsif params[:name].present?
+      @contacts = @contacts.where('name ILIKE ?', "%#{params[:name]}")
+    end
     render json: @contacts
   end
 
@@ -16,17 +22,17 @@ class Api::V1::ContactsController < ApplicationController
     geocoder_address(@contact)
 
     if @contact.save
-      render json: @contact, status: :created
+      render json: { message: 'Contact created successfully', contact: @contact }, status: :created
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      render json: { errors: @contact.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def update
     if @contact.update(contact_params)
-      render json: @contact
+      render json: { message: 'Contact updated successfully', contact: @contact }
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      render json: { errors: @contact.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
