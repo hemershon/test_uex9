@@ -58,4 +58,4 @@ localhots:8181
 ```
 Collecation Postman
 
-[Collecaction](https://github.com/hemershon/landetech/blob/main/Landetech.postman_collection.json)
+[Collecaction](https://github.com/hemershon)
